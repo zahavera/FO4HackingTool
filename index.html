@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Add description and theme-color for mobile -->
+    <meta name="description" content="Fallout 4 Terminal Hacking Helper">
+    <meta name="theme-color" content="#111111">
+    <title>Terminal Hacking Helper</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>RobCo Industries <span class="blink-cursor">█</span></h1>
+        
+        <div class="tabs">
+            <button class="tab-button active" data-tab="tool">HACK</button>
+            <button class="tab-button" data-tab="stats">STATS</button>
+        </div>
+
+        <div id="tool-tab" class="tab-content active">
+            <div class="input-section">
+                <h2>Enter Word List</h2>
+                <textarea id="wordList" placeholder="Enter words (one per line)" rows="10"></textarea>
+                <div class="button-group">
+                    <button id="startButton">Start</button>
+                    <button id="randomTestButton">Random Test</button>
+                </div>
+                <div id="validationMessage"></div>
+            </div>
+
+            <div id="testModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <h3>Select Answer Word</h3>
+                    <select id="answerSelect"></select>
+                    <button id="confirmAnswer">Start Test</button>
+                </div>
+            </div>
+
+            <div class="game-section" style="display: none;">
+                <div class="guess-section">
+                    <h2>Make a Guess</h2>
+                    <select id="wordSelect"></select>
+                    <input type="number" id="likeness" placeholder="Likeness" min="0">
+                    <button id="submitGuess">Submit Guess</button>
+                </div>
+
+                <div class="history-section">
+                    <h2>Guess History</h2>
+                    <ul id="guessHistory"></ul>
+                </div>
+
+                <div class="remaining-section">
+                    <h2>Remaining Possible Words</h2>
+                    <ul id="remainingWords"></ul>
+                </div>
+
+                <button id="resetButton">Start New Hack</button>
+            </div>
+        </div>
+
+        <div id="stats-tab" class="tab-content">
+            <h2>Terminal Records</h2>
+            <div id="statsContent">
+                <p>Average attempts: <span id="avgGuesses">-</span></p>
+                <p>Systems breached: <span id="gamesPlayed">0</span></p>
+                <p>Fastest hack: <span id="bestGame">-</span></p>
+                <p>Success rate: <span id="successRate">0</span>%</p>
+                <p>Recent hacks: <span id="recentScores">-</span></p>
+                <button id="licenseButton">License</button>
+                <div class="revision"></div> <!-- Remove hardcoded version -->
+            </div>
+        </div>
+    </div>
+
+    <div id="licenseModal" class="modal">
+        <div class="modal-content license-content">
+            <h3>MIT License</h3>
+            <pre id="licenseText"></pre>
+            <button id="closeLicense">Close</button>
+        </div>
+    </div>
+    
+    <div id="victoryModal" class="modal">
+        <div class="modal-content victory-content">
+            <h3>Terminal Access Granted</h3>
+            <div class="victory-history"></div>
+            <div class="victory-icon">👍</div>
+            <div class="victory-message"></div>
+            <button id="closeVictory">Start New Hack</button>
+        </div>
+    </div>
+
+    <div class="pipboy-decoration">
+        <div class="dial"></div>
+        <div class="dial"></div>
+        <div class="dial"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

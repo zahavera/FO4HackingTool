@@ -1,0 +1,504 @@
+/* Variables */
+:root {
+    --pip-green: #2ecc71;
+    --pip-dark-green: #27ae60;
+    --pip-black: #111;
+    --pip-gray: #333;
+    --pip-light-gray: #999;
+}
+
+/* Base Styles */
+body {
+    background-color: var(--pip-black);
+    color: var(--pip-green);
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 8px var(--pip-green);
+    margin: 0;  /* Remove default margin */
+    padding: 20px; /* Add padding to body instead of container */
+    min-height: 100vh; /* Full viewport height */
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Layout */
+.container {
+    width: 100%; /* Full width */
+    height: calc(100% - 40px); /* Subtract body padding */
+    max-width: none; /* Remove max-width constraint */
+    padding: 20px;
+    margin: 0; /* Remove margin */
+    border-radius: 10px; /* Updated border radius */
+    box-sizing: border-box;
+    position: relative;
+    border: 2px solid var(--pip-green);
+    box-shadow: 0 0 20px var(--pip-green);
+    background: var(--pip-black);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Allow scrolling inside container */
+}
+
+/* Text Inputs & Forms */
+textarea, input, select {
+    background: var(--pip-black) !important;
+    color: var(--pip-green) !important;
+    border: 1px solid var(--pip-green);
+    box-shadow: 0 0 5px var(--pip-green);
+    font-family: 'Courier New', monospace;
+}
+
+textarea:focus, input:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 10px var(--pip-green);
+}
+
+textarea {
+    width: 100%;
+    margin: 10px 0;
+}
+
+input, select {
+    padding: 5px 10px;
+    height: 31px; /* Match button height */
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"]::placeholder {
+    color: var(--pip-green);
+    opacity: 0.7;
+}
+
+/* Remove duplicate input styles and consolidate placeholders */
+::placeholder {
+    color: var(--pip-green) !important;
+    opacity: 0.7;
+}
+
+/* Components */
+.button-group {
+    display: flex;
+    gap: 10px;
+    align-items: center; /* Align items vertically */
+}
+
+button {
+    margin: 0; /* Remove vertical margins */
+    padding: 5px 10px;
+    height: 31px; /* Fixed height */
+    box-sizing: border-box;
+    background: var(--pip-black);
+    color: var(--pip-green);
+    border: 1px solid var(--pip-green);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background: var(--pip-green);
+    color: var(--pip-black);
+}
+
+/* Lists and History */
+#guessHistory,
+#remainingWords {
+    height: 75px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 10px;
+    list-style-type: none;
+    background: var(--pip-black);
+    border: 1px solid var(--pip-green);
+    box-shadow: 0 0 5px var(--pip-green);
+}
+
+#guessHistory {
+    height: 50px;
+}
+
+#guessHistory li {
+    margin: 5px 0;
+    display: flex;
+    align-items: flex-start;
+    min-height: 24px; /* Fixed height for consistency */
+}
+
+.guess-text {
+    letter-spacing: 7px;
+    flex: 0 0 auto; /* Prevent flex shrinking */
+    min-width: 120px; /* Adjust based on your longest word */
+    font-family: monospace;
+    min-width: max-content; /* Ensure it doesn't wrap */
+    display: inline-block;
+    width: 200px; /* Fixed width for alignment */
+    margin-right: 10px;
+}
+
+.guess-likeness {
+    margin-left: 10px;
+    letter-spacing: normal;
+    flex: 0 0 auto; /* Prevent flex shrinking */
+}
+
+#remainingWords {
+    display: flex;
+    flex-direction: column;
+}
+
+#remainingWords li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 0;
+    padding-right: 15px; /* Add right padding to prevent scrollbar overlap */
+}
+
+#remainingWords li:not(.eliminated) {
+    order: -1;
+}
+
+.eliminated {
+    text-decoration: line-through;
+    color: var(--pip-dark-green);
+    opacity: 0.5;
+}
+
+/* Remove duplicate remaining-section styles */
+.remaining-section {
+    margin: 20px 0;
+    padding: 0;
+}
+
+/* Animations */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes pulse {
+    0% { text-shadow: 0 0 5px var(--pip-green); }
+    50% { text-shadow: 0 0 20px var(--pip-green); }
+    100% { text-shadow: 0 0 5px var(--pip-green); }
+}
+
+/* Add styles for matching letters */
+.matching-letter {
+    color: var(--pip-green);
+    font-weight: bold;
+    text-shadow: 0 0 10px var(--pip-green);
+    animation: glow 1.5s ease-in-out infinite alternate;
+    padding: 0 4px; /* Increased from 2px to 4px */
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px var(--pip-green),
+                     0 0 10px var(--pip-green);
+    }
+    to {
+        text-shadow: 0 0 15px var(--pip-green),
+                     0 0 20px var(--pip-green),
+                     0 0 25px var(--pip-green),
+                     0 0 30px var(--pip-green);
+    }
+}
+
+.victory-content {
+    max-width: 600px !important;
+}
+
+.victory-history {
+    font-family: monospace;
+    text-align: left;
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid var(--pip-green);
+    box-shadow: 0 0 10px var(--pip-green);
+}
+
+/* New letter-grid styling */
+.guess-row {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    justify-content: flex-start;
+}
+
+.letter-box {
+    width: 40px; /* Increased from 30px */
+    height: 40px; /* Increased from 30px */
+    border: 1px solid var(--pip-green);
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 1.2em;
+    box-sizing: border-box;
+    padding: 4px; /* Add padding to account for glow */
+}
+
+.letter-box.matching-letter {
+    /* Remove any size-affecting properties */
+    padding: 4px;
+    width: 40px;
+    height: 40px;
+}
+
+.guess-info {
+    margin-left: 20px;
+}
+
+.victory-history .guess-text {
+    letter-spacing: 10px; /* Increased from 7px */
+    width: 300px; /* Increased from 200px */
+    margin-right: 20px;
+}
+
+.victory-icon {
+    font-size: 2em;
+    margin: 20px 0;
+    filter: hue-rotate(65deg) brightness(1.2);
+    animation: victoryGlow 2s infinite;
+}
+
+.victory-message {
+    font-size: 1.2em;
+    margin: 20px 0;
+    animation: textPulse 2s infinite;
+}
+
+@keyframes textPulse {
+    0%, 100% { text-shadow: 0 0 5px var(--pip-green); }
+    50% { text-shadow: 0 0 20px var(--pip-green),
+                       0 0 30px var(--pip-green); }
+}
+
+/* Remove old victory styles */
+.victory {
+    display: none;
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    body {
+        padding: 10px; /* Smaller padding on mobile */
+    }
+    .container {
+        padding: 10px; /* Slightly smaller padding on mobile */
+        border-radius: 10px; /* Keep border radius even on mobile */
+    }
+
+    .game-section {
+        margin-top: 10px;
+    }
+
+    .guess-section {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .guess-section input,
+    .guess-section select,
+    .guess-section button {
+        width: 100%;
+        margin: 0;
+    }
+
+    #remainingWords {
+        font-size: 0.9em;
+        padding-left: 20px;
+    }
+
+    .button-group {
+        flex-wrap: wrap;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    /* Remove fixed positioning for tabs */
+    .tabs {
+        margin: 10px 0;
+        position: static;
+        background: none;
+    }
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+/* Fix tabs styling */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: stretch;
+    width: 100%;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-button.active {
+    background: var(--pip-green);
+    color: var(--pip-black);
+    font-weight: bold;
+}
+
+/* Fix modal styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--pip-black);
+    border: 1px solid var(--pip-green);
+    box-shadow: 0 0 20px var(--pip-green);
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 10px; /* Updated border radius */
+    text-align: center;
+}
+
+.modal-content select,
+.modal-content button,
+.modal-content pre {
+    margin: 10px auto;
+}
+
+/* Fix scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+    background: var(--pip-black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--pip-green);
+    border-radius: 5px;
+    box-shadow: 0 0 5px var(--pip-green);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--pip-black);
+    border: 1px solid var(--pip-green);
+}
+
+/* Fix RobCo header styling */
+h1 {
+    text-align: center;
+    border-bottom: 2px solid var(--pip-green);
+    padding-bottom: 10px;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+h1::before, h1::after {
+    content: "▶";
+    margin: 0 20px;
+    animation: blink 1s infinite;
+}
+
+.blink-cursor {
+    animation: blink 1s infinite;
+}
+
+/* Center stats content */
+#stats-tab {
+    text-align: center;
+}
+
+#statsContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Position revision text */
+.revision {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: var(--pip-green);
+    font-size: 0.8em;
+    opacity: 0.7;
+}
+
+/* License modal styling */
+.stats-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.license-content {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.license-content pre {
+    color: var(--pip-green);
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    text-align: left;
+    margin: 20px 0;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+#licenseButton {
+    font-size: 0.8em;
+    padding: 5px 10px;
+    margin: 10px 0;
+}
+
+.revision {
+    color: var(--pip-green);
+    font-size: 0.8em;
+    opacity: 0.7;
+    margin-top: 5px;
+}
