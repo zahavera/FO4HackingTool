@@ -28,8 +28,8 @@ body {
     width: 100%; /* Full width */
     height: calc(100% - 40px); /* Subtract body padding */
     max-width: none; /* Remove max-width constraint */
-    padding: 20px;
-    margin: 0; /* Remove margin */
+    padding: 10px 15px 10px 10px; /* Asymmetric padding for scrollbar */
+    margin: 110px 0 0 0; /* Increased for header spacing */
     border-radius: 10px; /* Updated border radius */
     box-sizing: border-box;
     position: relative;
@@ -414,8 +414,9 @@ button:hover {
 
 /* Fix scrollbar styling */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
     background: var(--pip-black);
+    margin-right: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -427,6 +428,7 @@ button:hover {
 ::-webkit-scrollbar-track {
     background: var(--pip-black);
     border: 1px solid var(--pip-green);
+    margin-right: 5px;
 }
 
 /* Fix RobCo header styling */
@@ -434,9 +436,11 @@ h1 {
     text-align: center;
     border-bottom: 2px solid var(--pip-green);
     padding-bottom: 10px;
-    font-size: 2.5em;
+    font-size: 1.8em;
     text-transform: uppercase;
     margin-bottom: 20px;
+    margin: 5px 0 15px 0;
+    padding: 5px 10px 15px 10px;
 }
 
 h1::before, h1::after {
@@ -464,8 +468,8 @@ h1::before, h1::after {
 /* Position revision text */
 .revision {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
+    bottom: 25px;
+    left: 25px;
     color: var(--pip-green);
     font-size: 0.8em;
     opacity: 0.7;
@@ -546,12 +550,12 @@ h1 {
 
 .tabs {
     position: fixed;
-    top: 50px;
+    top: 60px; /* Increased to prevent overlap */
     left: 0;
     right: 0;
     background: var(--pip-black);
     z-index: 100;
-    padding: 10px;
+    padding: 5px 10px;
 }
 
 /* Main container adjustments */
