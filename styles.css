@@ -220,13 +220,16 @@ button:hover {
 
 .victory-content {
     max-width: 600px !important;
+    max-height: 90vh;
+    padding: 15px;
+    transform: scale(0.9) translateY(-55%); /* Scale down and adjust position */
 }
 
 .victory-history {
     font-family: monospace;
     text-align: left;
-    margin: 20px 0;
-    padding: 10px;
+    margin: 10px 0;
+    padding: 8px;
     border: 1px solid var(--pip-green);
     box-shadow: 0 0 10px var(--pip-green);
 }
@@ -240,15 +243,15 @@ button:hover {
 }
 
 .letter-box {
-    width: 40px; /* Increased from 30px */
-    height: 40px; /* Increased from 30px */
+    width: 35px;  /* Reduced from 40px */
+    height: 35px; /* Reduced from 40px */
     border: 1px solid var(--pip-green);
-    margin: 0 5px;
+    margin: 0 3px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: monospace;
-    font-size: 1.2em;
+    font-size: 1em;
     box-sizing: border-box;
     padding: 4px; /* Add padding to account for glow */
 }
@@ -256,8 +259,8 @@ button:hover {
 .letter-box.matching-letter {
     /* Remove any size-affecting properties */
     padding: 4px;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
 }
 
 .guess-info {
@@ -271,15 +274,15 @@ button:hover {
 }
 
 .victory-icon {
-    font-size: 2em;
-    margin: 20px 0;
+    font-size: 1.5em; /* Reduced from 2em */
+    margin: 10px 0; /* Reduced from 20px */
     filter: hue-rotate(65deg) brightness(1.2);
     animation: victoryGlow 2s infinite;
 }
 
 .victory-message {
-    font-size: 1.2em;
-    margin: 20px 0;
+    font-size: 1em; /* Reduced from 1.2em */
+    margin: 10px 0; /* Reduced from 20px */
     animation: textPulse 2s infinite;
 }
 
@@ -404,6 +407,11 @@ button:hover {
     margin: 10px auto;
 }
 
+.modal-content h3 {
+    font-size: 1.2em;
+    margin: 5px 0 10px 0;
+}
+
 /* Fix scrollbar styling */
 ::-webkit-scrollbar {
     width: 10px;
@@ -501,4 +509,133 @@ h1::before, h1::after {
     font-size: 0.8em;
     opacity: 0.7;
     margin-top: 5px;
+}
+
+/* Landscape enforcement */
+@media (orientation: portrait) {
+    body::before {
+        content: "Please rotate your device to landscape mode";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--pip-black);
+        color: var(--pip-green);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        padding: 20px;
+        text-align: center;
+    }
+}
+
+/* Header and tabs fixes */
+h1 {
+    font-size: 1.8em;
+    margin: 10px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--pip-black);
+    z-index: 100;
+    padding: 10px;
+}
+
+.tabs {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    background: var(--pip-black);
+    z-index: 100;
+    padding: 10px;
+}
+
+/* Main container adjustments */
+.container {
+    padding: 10px;
+    margin-top: 100px; /* Space for fixed header */
+    height: calc(100vh - 120px);
+}
+
+/* Scrollbar adjustments */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+.container {
+    padding-right: 20px; /* Space for scrollbar */
+}
+
+/* Word list textarea */
+#wordList {
+    height: 100px; /* Reduced height */
+}
+
+/* Game section adjustments */
+.game-section {
+    position: relative;
+}
+
+.guess-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+#submitGuess, #resetButton {
+    flex: 0 0 auto;
+}
+
+/* Victory modal adjustments */
+.victory-content {
+    max-height: 90vh;
+    padding: 15px;
+    transform: scale(0.9) translateY(-55%); /* Scale down and adjust position */
+}
+
+.victory-history {
+    margin: 10px 0;
+    padding: 8px;
+}
+
+.letter-box {
+    width: 35px;  /* Reduced from 40px */
+    height: 35px; /* Reduced from 40px */
+    font-size: 1em;
+    margin: 0 3px;
+}
+
+.letter-box.matching-letter {
+    width: 35px;
+    height: 35px;
+}
+
+.victory-icon {
+    font-size: 1.5em; /* Reduced from 2em */
+    margin: 10px 0; /* Reduced from 20px */
+}
+
+.victory-message {
+    font-size: 1em; /* Reduced from 1.2em */
+    margin: 10px 0; /* Reduced from 20px */
+}
+
+.modal-content h3 {
+    font-size: 1.2em;
+    margin: 5px 0 10px 0;
+}
+
+/* Stats page revision number */
+.revision {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 101;
+    background: var(--pip-black);
+    padding: 5px;
 }
